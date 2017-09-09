@@ -7,6 +7,9 @@
     "start": "node app/index.js",
     "dev": "nodemon app/index.js"
   },
+  "engines": {
+    "node": "^8.0.0"
+  },
   "dependencies": {
     "express": "~4.15.2",
     "mongodb": "^2.2.31"

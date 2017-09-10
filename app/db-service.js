@@ -5,23 +5,24 @@ var dbURL = 'mongodb://root:root@ds127854.mlab.com:27854/url-short-service'
 
 module.exports = {
   async getURL (short) {
-    var database = null
-    var query = {
+    let database = await mongoClient.connect(dbURL)
+    let results = []
+    let query = {
       short: short
     }
 
-    await mongoClient.connect(dbURL, (err, db) => {
-      if (err) throw err
-      database = db
-    })
-
-    await database.collection('urls').find(query).toArray((err, result) => {
-      if (err) throw err
+    try {
+      results = await database.collection('urls').find(query).toArray()
+    } catch (err) {
+      throw err
+    } finally {
       database.close()
-      return result[0]
-    })
+    }
+
+    return results
   },
   async setURL (url, short) {
+    let db = await mongoClient.connect(dbURL)
     // implement url update
   }
 }

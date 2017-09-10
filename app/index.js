@@ -10,23 +10,32 @@ var port = process.env.PORT || 9000
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('*', (req, res, next) => {
-  if (req.originalUrl === '/favicon.ico') {
-    res.status(204).end()
-  } else {
-    console.log('Request at ' + new Date().toUTCString())
-    next()
-  }
+app.use('/favicon.ico', (req, res) => {
+  res.status(204).end()
+})
+
+app.get('/404', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/404.html'))
 })
 
 app.get('/:code', (req, res, next) => {
   let code = req.params.code
-  let obj = dbService.getURL(code)
-  // redirect to url
-  console.log('got: ', obj)
+  dbService.getURL(code).then((result) => {
+    if (res.length > 0) {
+      res.redirect(result[0].url)
+    } else {
+      res.redirect('/404')
+    }
+  }).catch(() => {
+    res.redirect('/404')
+  }).then(next)
 })
 
-app.get('/', (req, res, next) => {
+app.get('*', function (req, res) {
+  res.redirect('/404')
+})
+
+app.post('/', (req, res, next) => {
   var address = url.parse(req.originalUrl, true).query.url
   if (!url.parse(address).hostname) {
     res.status(400).send({
@@ -48,10 +57,6 @@ app.get('/', (req, res, next) => {
       short: obj.short
     })
   }
-})
-
-app.use('*', function (req, res) {
-  res.end('NOT IMPLEMENTED: 404!')
 })
 
 app.listen(port)

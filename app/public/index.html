@@ -5,20 +5,36 @@
   <head>
     <meta charset="utf-8">
 
-    <title>URL Shortner</title>
+    <title>Open URL Shortner Service</title>
     <meta name="description" content="URL Shortner">
     <meta name="author" content="mubaidr@gmail.com">
-
     <link rel="stylesheet" href="index.css">
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
   <body>
-    <h1>Home</h1>
-    <div class="container"></div>
+    <h1 class="brand large">Open URL Shortner Service</h1>
+    <div class="container">
+      <h2>What is this? </h2>
+      <p>Open URL Shortner Service is an API which shortens the provided URL.</p>
+      <h2>How to use this?</h2>
+      <p>Send a post request to this endpoint with query paramter <code>"url"</code> containing the orignal URL; like <br/><br/><code>https://url-shortener-mubaidr.herokuapp.com/?url=https://www.google.com.pk</code>;
+        <br/><br/>and it will return an JSON object:</p>
+      <code>
+        {
+          url: "https://www.google.com.pk",
+          code: "aBcCdD"
+        }
+      </code>
+      <h2>How does it work?</h2>
+      <p></p>
+    </div>
+    <h3 class="brand">Designed and Coded by <a href="https://github.com/mubaidr">mubaidr</a></h3>
     <script src="index.js"></script>
   </body>
 

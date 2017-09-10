@@ -1,34 +1,39 @@
 body {
-  background-color: #3e50b4;
   padding: 0 20px;
-  color: #fefefe;
+  color: #3e50b4;
   font-family: 'Roboto', sans-serif;
   text-align: center;
 }
 
 .brand.large {
   font-size: 3em;
+  color: #663ab6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #663ab6;
 }
 
 a {
-  color: #fefefe;
+  color: #e81e62;
 }
 
 a:hover {
-  color: #ffffff;
-}
-
-h2 {
-  opacity: 0.5;
+  color: #c1185a;
 }
 
 .container {
-  margin: 75px 0;
+  margin: 25px 0;
   padding: 25px;
   text-align: center;
 }
 
 .error {
   font-size: 3em;
-  color: #fe9700;
+  color: #fe5622;
 }

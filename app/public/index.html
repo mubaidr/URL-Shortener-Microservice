@@ -24,15 +24,16 @@
       <p>Open URL Shortner Service is an API which shortens the provided URL.</p>
       <h2>How to use this?</h2>
       <p>Send a post request to this endpoint with query paramter <code>"url"</code> containing the orignal URL; like <br/><br/><code>https://url-shortener-mubaidr.herokuapp.com/?url=https://www.google.com.pk</code>;
-        <br/><br/>and it will return an JSON object:</p>
+        <br/><br/>and it will return an JSON object containing short URL:</p>
       <code>
         {
           url: "https://www.google.com.pk",
-          code: "aBcCdD"
+          short: "https://url-shortener-mubaidr.herokuapp.com/aBcCdD"
         }
       </code>
       <h2>How does it work?</h2>
-      <p></p>
+      <p>Nodejs, Expressjs and monogoDB magic.</p>
+      <p>Special thanks to:<br/><a href="https://mlab.com">mlab</a> for monogoDB hosting<br/><a href="https://heroku.com">heroku</a>        for nodejs hosting</p>
     </div>
     <h3 class="brand">Designed and Coded by <a href="https://github.com/mubaidr">mubaidr</a></h3>
     <script src="index.js"></script>

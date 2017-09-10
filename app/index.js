@@ -44,17 +44,18 @@ app.post('/', (req, res, next) => {
       short: null
     })
   } else {
-    var short = null
-    // calculate short code
-    let obj = dbService.getURL(short)
-    if (!obj) {
-      // save short, url to db
-    }
-
-    res.send({
-      error: null,
-      url: obj.url,
-      short: obj.short
+    dbService.setURL(address).then((res) => {
+      res.send({
+        error: null,
+        url: res.url,
+        short: res.short
+      })
+    }).catch((err) => {
+      res.status(400).send({
+        error: err,
+        url: address,
+        short: null
+      })
     })
   }
 })

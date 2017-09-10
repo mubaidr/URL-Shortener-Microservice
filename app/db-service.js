@@ -4,11 +4,11 @@ var dbURL = 'mongodb://root:root@ds127854.mlab.com:27854/url-short-service'
 // move user/pass to system configuration
 
 module.exports = {
-  async getURL (short) {
+  async getURL (code) {
     let database = await mongoClient.connect(dbURL)
     let results = []
     let query = {
-      short: short
+      short: code
     }
 
     try {
@@ -21,8 +21,15 @@ module.exports = {
 
     return results
   },
-  async setURL (url, short) {
-    let db = await mongoClient.connect(dbURL)
-    // implement url update
+  async setURL (url, code) {
+    this.getURL(code).then((res) => {
+      if (res.length > 0) {
+        // res.redirect(result[0].url)
+      } else {
+
+      }
+    }).catch(() => {
+
+    })
   }
 }

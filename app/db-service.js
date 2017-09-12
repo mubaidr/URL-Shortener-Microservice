@@ -22,14 +22,11 @@ module.exports = {
     return results
   },
   async setURL (url, code) {
-    this.getURL(code).then((res) => {
-      if (res.length > 0) {
-        // res.redirect(result[0].url)
-      } else {
-
-      }
-    }).catch(() => {
-
-    })
+    var res = await this.getURL(code)
+    if (res.length > 0) {
+      return res[0] // TOFIX return promise with result
+    } else {
+      // TODO return new promise with result
+    }
   }
 }

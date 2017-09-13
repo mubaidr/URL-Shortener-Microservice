@@ -22,13 +22,9 @@ module.exports = {
       short: code
     }
 
-    console.dir(query)
-
     try {
       database = await mongoClient.connect(dbURL)
       result = await database.collection('urls').findOne(query)
-
-      console.log(result)
     } catch (err) {
       console.error(err)
     } finally {
@@ -49,8 +45,6 @@ module.exports = {
     if (!obj) {
       let maxId = (await this.getMaxId()) + 1
       let code = urlService.encode(maxId)
-
-      console.log(maxId, code)
 
       obj = {
         id: maxId,

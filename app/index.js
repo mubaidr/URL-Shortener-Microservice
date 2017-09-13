@@ -24,7 +24,6 @@ app.get('/404', (req, res) => {
 app.get('/:code', (req, res) => {
   let code = req.params.code
   dbService.getURL(code).then(result => {
-    // console.log(result)
     res.redirect(result.url)
   }).catch(err => {
     console.error(err)

@@ -23,7 +23,6 @@ var app = new Vue({
           _self.loading = false
         },
         success: function (res) {
-          console.log(res)
           _self.short = res.short
           _self.loading = false
         }

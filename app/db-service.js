@@ -22,9 +22,13 @@ module.exports = {
       short: code
     }
 
+    console.dir(query)
+
     try {
       database = await mongoClient.connect(dbURL)
       result = await database.collection('urls').findOne(query)
+
+      console.log(result)
     } catch (err) {
       console.error(err)
     } finally {
@@ -43,15 +47,17 @@ module.exports = {
     let obj = await this.getURL(url, true)
 
     if (!obj) {
-      let maxId = (await this.getMaxId()) + 1
+      let maxId = 100 + (await this.getMaxId()) + 1
       let code = urlService.encode(maxId)
-      console.log(maxId)
+
+      console.log(maxId, code)
+
       obj = {
         id: maxId,
         url: url,
         short: code
       }
-      await this.addURL(obj)
+      await this.addURL(obj, maxId)
     }
     return obj
   },
@@ -61,10 +67,13 @@ module.exports = {
    * @param {object} obj
    * @returns true
    */
-  async addURL (obj) {
+  async addURL (obj, count) {
     let database = await mongoClient.connect(dbURL)
 
     await database.collection('urls').insertOne(obj)
+    await database.collection('counters').findOneAndUpdate({}, {
+      counter: count
+    })
     database.close()
     return true
   },

@@ -1,6 +1,4 @@
 var express = require('express')
-var http = require('http')
-var reload = require('reload')
 var path = require('path')
 var url = require('url')
 
@@ -68,11 +66,5 @@ app.post('/api', (req, res) => {
   }
 })
 
-var server = http.createServer(app)
-
-// Reload code here
-reload(app)
-
 /* start app */
-// app.listen(port)
-server.listen(port)
+app.listen(port)

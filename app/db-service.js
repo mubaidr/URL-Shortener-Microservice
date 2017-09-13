@@ -14,7 +14,7 @@ module.exports = {
    * @returns
    */
   async getURL (code, isFullUrl) {
-    let database = await mongoClient.connect(dbURL)
+    let database
     let result
     let query = isFullUrl ? {
       url: code
@@ -22,8 +22,15 @@ module.exports = {
       short: code
     }
 
-    result = await database.collection('urls').findOne(query).toArray()
-    database.close()
+    try {
+      database = await mongoClient.connect(dbURL)
+      result = await database.collection('urls').findOne(query).toArray()
+    } catch (err) {
+      console.error(err)
+    } finally {
+      database.close()
+    }
+
     return result
   },
   /**

@@ -23,13 +23,13 @@ app.get('/404', (req, res) => {
 /* code to url */
 app.get('/:code', (req, res) => {
   let code = req.params.code
-  let result = dbService.getURL(code)
-
-  if (result) {
+  dbService.getURL(code).then(result => {
+    // console.log(result)
     res.redirect(result.url)
-  } else {
+  }).catch(err => {
+    console.error(err)
     res.redirect('/404')
-  }
+  })
 })
 
 /* all others */

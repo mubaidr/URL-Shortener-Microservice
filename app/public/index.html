@@ -27,7 +27,7 @@
       <!-- <p>Enter an address in the filed and press submit button:</p> -->
       <div class="form" id="app">
         <input type="text" v-model="url" placeholder="http://" :disabled="loading" />
-        <button @click="shortenURL" :disabled="!url && loading">Magic!</button>
+        <button @click="shortenURL" :disabled="!url || loading" :class="{'loading': loading}">{{loading? 'Loading' : 'Magic!'}}</button>
         <br/>
         <div class="result">{{short}}</div>
       </div>
@@ -39,7 +39,7 @@
       <h4>Form</h4>
       <p>Enter url in field above and get your short URL.</p>
       <h4>API</h4>
-      <p>Send a post request to the api endpoint with query paramter <code>"url"</code> containing the orignal URL; like <br/><br/><code>https://url-shortener-mubaidr.herokuapp.com/api?url=https://www.google.com.pk</code>;
+      <p>Send a post request to the api endpoint with query paramter <code>"url"</code> containing the orignal URL; like <br/><br/><code>https://url-shortener-mubaidr.herokuapp.com/api?url=https://www.google.com.pk</code>
         <br/><br/>and it will return an JSON object containing short URL:</p>
       <code>
           {
@@ -55,6 +55,7 @@
     </div>
 
     <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/reqwest"></script>
     <script src="index.js"></script>
   </body>
 

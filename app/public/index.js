@@ -6,7 +6,7 @@ var app = new Vue({
   data () {
     return {
       url: 'https://github.com/mubaidr',
-      short: 'Your Result will appear here!',
+      short: '',
       loading: false
     }
   },
@@ -23,7 +23,7 @@ var app = new Vue({
           _self.loading = false
         },
         success: function (res) {
-          _self.short = res.short
+          _self.short = location.href + res.short
           _self.loading = false
         }
       })

@@ -38,31 +38,53 @@ a:hover {
 }
 
 .form {
-  width: 50%;
-  max-width: 340px;
+  width: 75%;
+  max-width: 450px;
   padding: 10px;
   margin: 0 auto;
+  margin-top: 25px;
 }
 
-input {
-  width: 66%;
+.form input {
+  width: 66.7%;
   padding: 15px;
   border: none;
   box-shadow: none;
   border: 1px solid #673ab7;
+  outline: none;
 }
 
-input:last-child {
-  width: 100%;
-  color: #673ab7;
-  margin-top: 25px;
-}
-
-button {
+.form button {
   border: none;
   padding: 15px;
-  width: 23%;
+  width: 24.5%;
   cursor: pointer;
   background-color: #673ab7;
+  border: 1px solid #673ab7;
   color: #fefefe;
+  outline: none;
+}
+
+.form button:disabled {
+  opacity: 0.75;
+}
+
+.form button:active {
+  transform: scale(0.95)
+}
+
+.form .result {
+  color: #673ab7;
+  margin-top: 30px;
+  font-weight: bold;
+  padding: 15px;
+  width: 92.5%;
+  max-width: 450px;
+  border: 1px solid #673ab7;
+  min-height: 21px;
+}
+
+.container hr {
+  margin: 50px;
+  border-color: #673ab7;
 }

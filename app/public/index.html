@@ -15,24 +15,23 @@
   <![endif]-->
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="https://unpkg.com/vue"></script>
-    <script src="index.js"></script>
   </head>
 
   <body>
     <div class="header">
       <h1 class="brand large">Open URL Shortner Service</h1>
-      <p>Open URL Shortner is a Service which shortens the provided URL so it’s ready to be shared everywhere.</p>
+      <p>Open URL Shortner is a Service which shortens the provided URL so it’s ready to be shared everywhere. <a href="https://github.com/mubaidr/URL-Shortener-Microservice">View Source</a></p>
     </div>
     <div class="container text-center">
       <!-- <h2>Get short URL now</h2> -->
       <!-- <p>Enter an address in the filed and press submit button:</p> -->
-      <div class="form">
-        <input type="text" placeholder="http://" />
-        <button>Magic!</button>
+      <div class="form" id="app">
+        <input type="text" v-model="url" placeholder="http://" :disabled="loading" />
+        <button @click="shortenURL" :disabled="!url && loading">Magic!</button>
         <br/>
-        <input class="result" type="text" placeholder="Short url" readonly />
+        <div class="result">{{short}}</div>
       </div>
+      <hr/>
       <h2>About</h2>
       <h3>What is this? </h3>
       <p>Open URL Shortner is a service which shortens the provided URL.</p>
@@ -40,7 +39,7 @@
       <h4>Form</h4>
       <p>Enter url in field above and get your short URL.</p>
       <h4>API</h4>
-      <p>Send a post request to this endpoint with query paramter <code>"url"</code> containing the orignal URL; like <br/><br/><code>https://url-shortener-mubaidr.herokuapp.com/?url=https://www.google.com.pk</code>;
+      <p>Send a post request to the api endpoint with query paramter <code>"url"</code> containing the orignal URL; like <br/><br/><code>https://url-shortener-mubaidr.herokuapp.com/api?url=https://www.google.com.pk</code>;
         <br/><br/>and it will return an JSON object containing short URL:</p>
       <code>
           {
@@ -51,9 +50,12 @@
       <h3>How does it work?</h3>
       <p>Nodejs, Expressjs and mongoDB</p>
       <p>Special thanks to:<br/><a href="https://mlab.com">mlab</a> for monogoDB hosting<br/><a href="https://heroku.com">heroku</a>        for nodejs hosting</p>
+      <br/>
       <h3 class="brand">Designed and Coded by <a href="https://github.com/mubaidr">mubaidr</a></h3>
     </div>
 
+    <script src="https://unpkg.com/vue"></script>
+    <script src="index.js"></script>
   </body>
 
 </html>

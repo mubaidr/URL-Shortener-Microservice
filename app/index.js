@@ -7,16 +7,20 @@ var dbService = require('./db-service')
 var app = express()
 var port = process.env.PORT || 9000
 
+/* static resources */
 app.use(express.static(path.join(__dirname, 'public')))
 
+/* favicon */
 app.get('/favicon.ico', (req, res) => {
-  res.status(204).end()
+  res.sendFile(path.join(__dirname, '/public/favicon.png'))
 })
 
+/* invalid */
 app.get('/404', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/404.html'))
 })
 
+/* code to url */
 app.get('/:code', (req, res) => {
   let code = req.params.code
   let result = dbService.getURL(code)
@@ -28,10 +32,12 @@ app.get('/:code', (req, res) => {
   }
 })
 
+/* all others */
 app.get('*', function (req, res) {
   res.redirect('/404')
 })
 
+/* conversion post */
 app.post('/', (req, res) => {
   let address = url.parse(req.originalUrl, true).query.url
   let result
@@ -60,4 +66,5 @@ app.post('/', (req, res) => {
   }
 })
 
+/* start app */
 app.listen(port)

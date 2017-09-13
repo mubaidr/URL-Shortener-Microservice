@@ -2,6 +2,12 @@ var alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
 var base = alphabet.length
 
 module.exports = {
+  /**
+   *
+   *
+   * @param {number} num Number to encode to base 58
+   * @returns {string} Encoded string
+   */
   encode (num) {
     var encoded = ''
     while (num) {
@@ -11,6 +17,12 @@ module.exports = {
     }
     return encoded
   },
+  /**
+   *
+   *
+   * @param {string} str String to decode
+   * @returns {number} Decoded number
+   */
   decode (str) {
     var decoded = 0
     while (str) {

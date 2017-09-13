@@ -2,7 +2,6 @@ var express = require('express')
 var path = require('path')
 var url = require('url')
 
-// var urlService = require('./url-service')
 var dbService = require('./db-service')
 
 var app = express()
@@ -10,7 +9,7 @@ var port = process.env.PORT || 9000
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/favicon.ico', (req, res) => {
+app.get('/favicon.ico', (req, res) => {
   res.status(204).end()
 })
 
@@ -18,25 +17,25 @@ app.get('/404', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/404.html'))
 })
 
-app.get('/:code', (req, res, next) => {
+app.get('/:code', (req, res) => {
   let code = req.params.code
-  dbService.getURL(code).then((result) => {
-    if (res.length > 0) {
-      res.redirect(result[0].url)
-    } else {
-      res.redirect('/404')
-    }
-  }).catch(() => {
+  let result = dbService.getURL(code)
+
+  if (result) {
+    res.redirect(result.url)
+  } else {
     res.redirect('/404')
-  }).then(next)
+  }
 })
 
 app.get('*', function (req, res) {
   res.redirect('/404')
 })
 
-app.post('/', (req, res, next) => {
-  var address = url.parse(req.originalUrl, true).query.url
+app.post('/', (req, res) => {
+  let address = url.parse(req.originalUrl, true).query.url
+  let result
+
   if (!url.parse(address).hostname) {
     res.status(400).send({
       error: 'Invalid request.',
@@ -44,19 +43,20 @@ app.post('/', (req, res, next) => {
       short: null
     })
   } else {
-    dbService.setURL(address).then((res) => {
-      res.send({
+    result = dbService.setURL(address)
+    if (result) {
+      res.status(200).send({
         error: null,
-        url: res.url,
-        short: res.short
+        url: result.url,
+        short: result.short
       })
-    }).catch((err) => {
-      res.status(400).send({
-        error: err,
+    } else {
+      res.status(500).send({
+        error: 'Something bad happened!.',
         url: address,
         short: null
       })
-    })
+    }
   }
 })
 

@@ -47,7 +47,7 @@ module.exports = {
     let obj = await this.getURL(url, true)
 
     if (!obj) {
-      let maxId = 100 + (await this.getMaxId()) + 1
+      let maxId = (await this.getMaxId()) + 1
       let code = urlService.encode(maxId)
 
       console.log(maxId, code)

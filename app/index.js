@@ -1,4 +1,6 @@
 var express = require('express')
+var http = require('http')
+var reload = require('reload')
 var path = require('path')
 var url = require('url')
 
@@ -38,7 +40,7 @@ app.get('*', function (req, res) {
 })
 
 /* conversion post */
-app.post('/', (req, res) => {
+app.post('/api', (req, res) => {
   let address = url.parse(req.originalUrl, true).query.url
   let result
 
@@ -66,5 +68,11 @@ app.post('/', (req, res) => {
   }
 })
 
+var server = http.createServer(app)
+
+// Reload code here
+reload(app)
+
 /* start app */
-app.listen(port)
+// app.listen(port)
+server.listen(port)

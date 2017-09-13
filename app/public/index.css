@@ -1,26 +1,26 @@
 body {
-  padding: 0 20px;
-  color: #3e50b4;
   font-family: 'Roboto', sans-serif;
-  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #673ab7;
+  padding: 50px;
+  color: #fefefe;
 }
 
 .brand.large {
   font-size: 3em;
-  color: #663ab6;
+  margin-bottom: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #663ab6;
+h2 {
+  color: #673ab7;
 }
 
 a {
-  color: #e81e62;
+  color: #fe4081;
 }
 
 a:hover {
@@ -28,7 +28,6 @@ a:hover {
 }
 
 .container {
-  margin: 25px 0;
   padding: 25px;
   text-align: center;
 }
@@ -36,4 +35,34 @@ a:hover {
 .error {
   font-size: 3em;
   color: #fe5622;
+}
+
+.form {
+  width: 50%;
+  max-width: 340px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+input {
+  width: 66%;
+  padding: 15px;
+  border: none;
+  box-shadow: none;
+  border: 1px solid #673ab7;
+}
+
+input:last-child {
+  width: 100%;
+  color: #673ab7;
+  margin-top: 25px;
+}
+
+button {
+  border: none;
+  padding: 15px;
+  width: 23%;
+  cursor: pointer;
+  background-color: #673ab7;
+  color: #fefefe;
 }

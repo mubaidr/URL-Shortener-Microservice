@@ -40,7 +40,6 @@ app.get('*', function (req, res) {
 /* conversion post */
 app.post('/api', (req, res) => {
   let address = url.parse(req.originalUrl, true).query.url
-  let result
 
   if (!url.parse(address).hostname) {
     res.status(400).send({
@@ -49,20 +48,19 @@ app.post('/api', (req, res) => {
       short: null
     })
   } else {
-    result = dbService.setURL(address)
-    if (result) {
-      res.status(200).send({
+    dbService.setURL(address).then(result => {
+      res.send({
         error: null,
         url: result.url,
         short: result.short
       })
-    } else {
+    }).catch(() => {
       res.status(500).send({
         error: 'Something bad happened!.',
         url: address,
         short: null
       })
-    }
+    })
   }
 })
 

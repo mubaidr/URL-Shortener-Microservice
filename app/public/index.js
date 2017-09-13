@@ -12,20 +12,20 @@ var app = new Vue({
   },
   methods: {
     shortenURL () {
-      this.loading = true
+      let _self = this
+      _self.loading = true
       // eslint-disable-next-line
       reqwest({
-        url: 'api?url=' + this.url,
-        type: 'json',
+        url: 'api?url=' + _self.url,
         method: 'post',
         error: function () {
-          this.short = 'Error occurred!'
+          _self.short = 'Error occurred!'
+          _self.loading = false
         },
         success: function (res) {
-          this.short = res.short
-        },
-        complete: function () {
-          this.loading = false
+          console.log(res)
+          _self.short = res.short
+          _self.loading = false
         }
       })
     }

@@ -1,5 +1,7 @@
 # URL-Shortener-Microservice
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mubaidr/URL-Shortener-Microservice.svg)](https://greenkeeper.io/)
+
 ## What is this?
 
 Open URL Shortner is a service which shortens the provided URL.
